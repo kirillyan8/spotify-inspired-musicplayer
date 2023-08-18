@@ -7,7 +7,7 @@ import { useAudio } from "react-use";
 import { twMerge } from "tailwind-merge";
 
 import { Song } from "@/types";
-import usePlayer from "@/hooks/usePlayer";
+import usePlayer from "@/hooks/stores/usePlayer";
 import LibraryItem from "@/components/LibraryItem";
 import VolumeSlider from "@/components/VolumeSlider";
 import SongTimeControlSlider from "@/components/SongTimeControlSlider";

@@ -1,19 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useSessionContext, useUser } from "@supabase/auth-helpers-react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 import useSignInModal from "@/hooks/modals/useSignInModal";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import useLikedSongs from "@/hooks/stores/useLikedSongs";
 
 const useLikeSong = (songId: string) => {
   const router = useRouter();
   const { supabaseClient } = useSessionContext();
   const { onOpen: openAuthModal } = useSignInModal();
   const user = useUser();
-  const [isLiked, setIsLiked] = useState(false);
+  const isLiked = useLikedSongs((state) => state.likedSongs[songId]);
+  const likeSong = useLikedSongs(state => state.likeSong)
+  const unlikeSong = useLikedSongs(state => state.unlikeSong)
+
 
   useEffect(() => {
     if (!user?.id) {
@@ -24,17 +28,15 @@ const useLikeSong = (songId: string) => {
       const { data, error } = await supabaseClient
         .from("liked_songs")
         .select("*")
-        .eq("user_id", user?.id)
-        .eq("song_id", songId)
-        .single();
+        .match({user_id: user.id, song_id: songId})
 
       if (data && !error) {
-        setIsLiked(true);
+        likeSong(songId);
       }
     };
 
     fetchLikeData();
-  }, [user?.id, supabaseClient, songId]);
+  }, [user?.id, supabaseClient, songId, likeSong]);
 
   const Icon = isLiked ? AiFillHeart : AiOutlineHeart;
 
@@ -59,7 +61,7 @@ const useLikeSong = (songId: string) => {
         return toast.error("Something went wrong...");
       }
 
-      setIsLiked(false);
+      unlikeSong(songId);
     } else {
       const { error } = await supabaseClient.from("liked_songs").insert({
         user_id: user.id,
@@ -70,7 +72,7 @@ const useLikeSong = (songId: string) => {
         return toast.error("Something went wrong...");
       }
 
-      setIsLiked(true);
+      likeSong(songId);
     }
 
     router.refresh();

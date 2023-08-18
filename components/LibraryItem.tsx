@@ -48,8 +48,8 @@ const LibraryItem: FC<LibraryItemProps> = ({
           />
         </div>
         <div className="flex flex-col">
-          <p className="truncate font-bold">{song.title}</p>
-          <p className="truncate text-sm text-neutral-500">{song.author}</p>
+          <p className="truncate font-bold max-w-[49dvw] md:max-w-[40dvw] lg:max-w-[54dwh]">{song.title}</p>
+          <p className="truncate text-sm text-neutral-500 max-w-[49dvw] md:max-w-[40dvw] lg:max-w-[54dwh]">{song.author}</p>
         </div>
       </div>
       <div className="flex items-center justify-center gap-x-4">

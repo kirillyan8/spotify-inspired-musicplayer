@@ -1,6 +1,6 @@
 import { Song } from "@/types";
 
-import usePlayer from "./usePlayer";
+import usePlayer from "./stores/usePlayer";
 
 const useOnPlay = (songs: Song[]) => {
   const player = usePlayer();

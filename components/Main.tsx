@@ -3,7 +3,7 @@
 import React, { FC, PropsWithChildren } from "react";
 import { twMerge } from "tailwind-merge";
 
-import usePlayer from "@/hooks/usePlayer";
+import usePlayer from "@/hooks/stores/usePlayer";
 
 interface MainProps extends PropsWithChildren {}
 

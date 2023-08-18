@@ -11,7 +11,7 @@ import Box from "@/components/Box";
 import SidebarItem from "@/components/SidebarItem";
 import Library from "@/components/Library";
 import { twMerge } from "tailwind-merge";
-import usePlayer from "@/hooks/usePlayer";
+import usePlayer from "@/hooks/stores/usePlayer";
 
 interface SidebarProps {
   songs: Song[];
