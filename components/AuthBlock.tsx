@@ -16,7 +16,7 @@ const AuthBlock: FC<AuthBlockProps> = ({ view }) => {
       supabaseClient={supabaseClient}
       theme="dark"
       magicLink
-      providers={["github", "google"]}
+      providers={["github", "discord"]}
       appearance={{
         theme: ThemeSupa,
         variables: {
