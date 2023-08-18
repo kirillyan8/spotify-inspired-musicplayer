@@ -17,7 +17,7 @@ const font = Figtree({ subsets: ["latin"] });
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-  title: "Spotify Copy",
+  title: "Spotify Inspired MusicPlayer",
   description: "Music everywhere, just listen!",
 };
 
