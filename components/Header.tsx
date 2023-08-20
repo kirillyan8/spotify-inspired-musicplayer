@@ -30,8 +30,12 @@ const Header: FC<HeaderProps> = ({ children, className }) => {
   const handleLogout = async () => {
     const { error } = await supabaseClient.auth.signOut();
 
-    if (error) toast.error(error.message);
-    else toast.success("Logged out!");
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success("Logged out!");
+    }
+    router.refresh();
   };
 
   return (
