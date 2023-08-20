@@ -39,7 +39,7 @@ export default async function RootLayout({
           <Main>{children}</Main>
           <Player />
         </SupabaseProvider>
-        <Analytics mode={"development"} />
+        <Analytics mode={"production"} />
       </body>
     </html>
   );
