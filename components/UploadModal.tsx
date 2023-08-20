@@ -42,7 +42,7 @@ const UploadModal = () => {
     }
     setTimeout(() => {
       toast.success("🎉 Song should be created!");
-      setIsLoading(true);
+      setIsLoading(false);
       reset();
       closeUploadModal();
     }, 2500);
