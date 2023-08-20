@@ -53,12 +53,16 @@ const Header: FC<HeaderProps> = ({ children, className }) => {
           <button
             className="flex items-center justify-center rounded-full bg-black text-white transition hover:opacity-60"
             onClick={() => router.back()}
+            aria-label="Go back"
+            title="Back"
           >
             <RxCaretLeft size={35} />
           </button>
           <button
             className="flex items-center justify-center rounded-full bg-black text-white transition hover:opacity-60"
             onClick={() => router.forward()}
+            aria-label="Go forward"
+            title="Forward"
           >
             <RxCaretRight size={35} />
           </button>
