@@ -115,7 +115,7 @@ const UploadModal = () => {
       isOpen={isOpen}
       onChange={onChange}
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-4">
+      <form onSubmit={handleSubmit(onDemoSubmit)} className="flex flex-col gap-y-4">
         <Input
           id="title"
           disabled={isLoading}
