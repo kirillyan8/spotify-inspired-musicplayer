@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import useSignInModal from "@/hooks/modals/useSignInModal";
 import Button from "@/components/Button";
 import useSignUpModal from "@/hooks/modals/useSignUpModal";
+import useLikedSongs from "@/hooks/stores/useLikedSongs";
 
 interface HeaderProps {
   children: ReactNode;
@@ -23,6 +24,7 @@ const Header: FC<HeaderProps> = ({ children, className }) => {
   const router = useRouter();
   const { onOpen: openSignInModal } = useSignInModal();
   const { onOpen: openSignUpModal } = useSignUpModal();
+  const resetLikedSongs = useLikedSongs((state) => state.reset);
 
   const supabaseClient = useSupabaseClient();
   const User = useUser();
@@ -36,6 +38,7 @@ const Header: FC<HeaderProps> = ({ children, className }) => {
       toast.success("Logged out!");
     }
     router.refresh();
+    resetLikedSongs();
   };
 
   return (
