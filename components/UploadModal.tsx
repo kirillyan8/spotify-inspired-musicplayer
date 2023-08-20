@@ -31,6 +31,24 @@ const UploadModal = () => {
     closeUploadModal();
   };
 
+  // Demo submit
+  const onDemoSubmit: SubmitHandler<FieldValues> = (values) => {
+    setIsLoading(true);
+
+    const songFile = values?.song[0];
+    const imageFile = values?.image[0];
+    if (!songFile || !imageFile || !user) {
+      return toast.error("No song or image provided");
+    }
+    setTimeout(() => {
+      toast.success("🎉 Song should be created!");
+      setIsLoading(true);
+      reset();
+      closeUploadModal();
+    }, 2500);
+  };
+
+  // FIXME: Real submit
   const onSubmit: SubmitHandler<FieldValues> = async (values) => {
     try {
       setIsLoading(true);
@@ -79,8 +97,8 @@ const UploadModal = () => {
         return toast.error(error.message);
       }
 
-      router.refresh();
       toast.success("🎉 Song created!");
+      router.refresh();
       reset();
       closeUploadModal();
     } catch (e) {
@@ -146,7 +164,11 @@ const UploadModal = () => {
             })}
           />
         </div>
-        <Button className="w-full" type="submit">
+        <Button
+          className="w-full disabled:bg-neutral-500"
+          type="submit"
+          disabled={isLoading}
+        >
           {isLoading ? "Uploading..." : "Submit a song"}
         </Button>
       </form>
