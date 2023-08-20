@@ -1,10 +1,10 @@
 # Spotify Inspired MusicPlayer
 Simple online music player, where users can upload and listen songs.
 
-![spotify-inspired-musicplayer](https://github.com/kirillyan8/spotify-inspired-musicplayer/assets/99244612/095fb799-3045-46e5-a5a7-25f7825feab8)
+![spotify-inspired-musicplayer](https://github.com/kirillyan8/spotify-inspired-musicplayer/assets/99244612/4e75ab39-268b-4180-91a9-e9dbfb323e16)
 
 ## Demo project
-Demo version of project can be found at
+Demo version of project can be found at https://spotify-inspired-musicplayer.vercel.app/
 * Song upload restricted, but uploading user experience simulated
 
 ## Key user features
