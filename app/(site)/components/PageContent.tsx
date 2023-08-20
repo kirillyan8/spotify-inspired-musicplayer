@@ -3,8 +3,12 @@
 import React, { FC } from "react";
 
 import { Song } from "@/types";
-import SongItem from "@/components/SongItem";
 import useOnPlay from "@/hooks/useOnPlay";
+import useUploadSong from "@/hooks/userActions/useUploadSong";
+
+import SongItem from "@/components/SongItem";
+import MessageBox from "@/components/MessageBox";
+import MessageBoxLink from "@/components/MessageBoxLink";
 
 interface PageContentProps {
   songs: Song[];
@@ -12,9 +16,15 @@ interface PageContentProps {
 
 const PageContent: FC<PageContentProps> = ({ songs }) => {
   const onPlay = useOnPlay(songs);
+  const { uploadSong } = useUploadSong();
 
   if (songs.length === 0) {
-    return <p className="text-sm text-neutral-500">No songs available.</p>;
+    return (
+      <MessageBox className="mt-3 px-0">
+        No songs available. Feel free to{" "}
+        <MessageBoxLink onClick={uploadSong}>add</MessageBoxLink> one!
+      </MessageBox>
+    );
   }
 
   return (

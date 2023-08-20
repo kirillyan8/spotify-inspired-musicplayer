@@ -10,6 +10,8 @@ import useSignUpModal from "@/hooks/modals/useSignUpModal";
 import useOnPlay from "@/hooks/useOnPlay";
 import { useSessionContext, useUser } from "@supabase/auth-helpers-react";
 import LibraryItemContainer from "@/components/LibraryItemContainer";
+import MessageBox from "@/components/MessageBox";
+import MessageBoxLink from "@/components/MessageBoxLink";
 
 interface LikedContentProps {
   songs: Song[];
@@ -24,23 +26,11 @@ const LikedContent: FC<LikedContentProps> = ({ songs }) => {
 
   if (!user && !isLoading) {
     return (
-      <p className=" px-6 text-sm text-neutral-500">
+      <MessageBox>
         In order to save songs and listen them again you need to{" "}
-        <span
-          className="cursor-pointer underline hover:text-neutral-400"
-          onClick={openSignUpModal}
-        >
-          sign up
-        </span>{" "}
-        or{" "}
-        <span
-          className="cursor-pointer underline hover:text-neutral-400"
-          onClick={openSignInModal}
-        >
-          login
-        </span>
-        .
-      </p>
+        <MessageBoxLink onClick={openSignUpModal}>sign up</MessageBoxLink> or{" "}
+        <MessageBoxLink onClick={openSignInModal}>login</MessageBoxLink>.
+      </MessageBox>
     );
   }
 

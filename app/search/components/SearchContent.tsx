@@ -6,6 +6,8 @@ import useUploadSong from "@/hooks/userActions/useUploadSong";
 import LibraryItem from "@/components/LibraryItem";
 import useOnPlay from "@/hooks/useOnPlay";
 import LibraryItemContainer from "@/components/LibraryItemContainer";
+import MessageBox from "@/components/MessageBox";
+import MessageBoxLink from "@/components/MessageBoxLink";
 
 interface SearchContentProps {
   songs: Song[];
@@ -17,16 +19,10 @@ const SearchContent: FC<SearchContentProps> = ({ songs }) => {
 
   if (songs.length === 0) {
     return (
-      <p className="px-6 text-sm text-neutral-500">
+      <MessageBox>
         No songs found, feel free to{" "}
-        <span
-          onClick={uploadSong}
-          className="cursor-pointer underline hover:text-neutral-400"
-        >
-          add
-        </span>{" "}
-        them!
-      </p>
+        <MessageBoxLink onClick={uploadSong}>add</MessageBoxLink> them!
+      </MessageBox>
     );
   }
   return (

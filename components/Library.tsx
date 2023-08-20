@@ -3,11 +3,16 @@
 import React, { FC } from "react";
 import { TbPlaylist } from "react-icons/tb";
 import { AiOutlinePlus } from "react-icons/ai";
+import { useUser } from "@supabase/auth-helpers-react";
 
 import { Song } from "@/types";
-import LibraryItem from "@/components/LibraryItem";
 import useUploadSong from "@/hooks/userActions/useUploadSong";
 import useOnPlay from "@/hooks/useOnPlay";
+import LibraryItem from "@/components/LibraryItem";
+import MessageBox from "@/components/MessageBox";
+import MessageBoxLink from "@/components/MessageBoxLink";
+import useSignInModal from "@/hooks/modals/useSignInModal";
+import useSignUpModal from "@/hooks/modals/useSignUpModal";
 
 interface LibraryProps {
   songs: Song[];
@@ -16,6 +21,9 @@ interface LibraryProps {
 const Library: FC<LibraryProps> = ({ songs }) => {
   const { uploadSong } = useUploadSong();
   const onPlay = useOnPlay(songs);
+  const user = useUser();
+  const { onOpen: openSignInModal } = useSignInModal();
+  const { onOpen: openSignUpModal } = useSignUpModal();
 
   return (
     <section className="flex flex-col">
@@ -29,13 +37,24 @@ const Library: FC<LibraryProps> = ({ songs }) => {
         </button>
       </div>
       <div className="mt-4 flex flex-col gap-y-2 px-3">
-        {songs.map((song) => (
-          <LibraryItem
-            song={song}
-            onClick={() => onPlay(song.id)}
-            key={song.id}
-          />
-        ))}
+        {!user ? (
+          <>
+            <MessageBox>Only authenticated users can upload songs.</MessageBox>
+            <MessageBox>
+              <MessageBoxLink onClick={openSignInModal}>Login</MessageBoxLink>{" "}
+              or{" "}
+              <MessageBoxLink onClick={openSignUpModal}>Sign up</MessageBoxLink>
+            </MessageBox>
+          </>
+        ) : (
+          songs.map((song) => (
+            <LibraryItem
+              song={song}
+              onClick={() => onPlay(song.id)}
+              key={song.id}
+            />
+          ))
+        )}
       </div>
     </section>
   );
