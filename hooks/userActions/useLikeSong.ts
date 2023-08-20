@@ -15,9 +15,8 @@ const useLikeSong = (songId: string) => {
   const { onOpen: openAuthModal } = useSignInModal();
   const user = useUser();
   const isLiked = useLikedSongs((state) => state.likedSongs[songId]);
-  const likeSong = useLikedSongs(state => state.likeSong)
-  const unlikeSong = useLikedSongs(state => state.unlikeSong)
-
+  const likeSong = useLikedSongs((state) => state.likeSong);
+  const unlikeSong = useLikedSongs((state) => state.unlikeSong);
 
   useEffect(() => {
     if (!user?.id) {
@@ -28,9 +27,9 @@ const useLikeSong = (songId: string) => {
       const { data, error } = await supabaseClient
         .from("liked_songs")
         .select("*")
-        .match({user_id: user.id, song_id: songId})
+        .match({ user_id: user.id, song_id: songId });
 
-      if (data && !error) {
+      if (data?.length !== 0 && !error) {
         likeSong(songId);
       }
     };
