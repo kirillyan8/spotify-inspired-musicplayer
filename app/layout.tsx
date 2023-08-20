@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import { twMerge } from "tailwind-merge";
+import { Analytics } from "@vercel/analytics/react";
 
 import getSongsByUserId from "@/lib/actions/getSongsByUserId";
 import SupabaseProvider from "@/providers/SupabaseProvider";
@@ -33,13 +34,12 @@ export default async function RootLayout({
       <body className={twMerge(font.className, "flex h-full")}>
         <ToastProvider />
         <SupabaseProvider>
-            <ModalProvider />
-            <Sidebar songs={songs} />
-            <Main>
-              {children}
-            </Main>
-            <Player />
+          <ModalProvider />
+          <Sidebar songs={songs} />
+          <Main>{children}</Main>
+          <Player />
         </SupabaseProvider>
+        <Analytics mode={"development"} />
       </body>
     </html>
   );
