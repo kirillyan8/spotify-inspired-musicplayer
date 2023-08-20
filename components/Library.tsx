@@ -46,7 +46,7 @@ const Library: FC<LibraryProps> = ({ songs }) => {
               <MessageBoxLink onClick={openSignUpModal}>Sign up</MessageBoxLink>
             </MessageBox>
           </>
-        ) : (
+        ) : songs.length === 0 ? (
           songs.map((song) => (
             <LibraryItem
               song={song}
@@ -54,6 +54,11 @@ const Library: FC<LibraryProps> = ({ songs }) => {
               key={song.id}
             />
           ))
+        ) : (
+          <MessageBox>
+            There is no songs yet, try{" "}
+            <MessageBoxLink onClick={uploadSong}>upload</MessageBoxLink> one!
+          </MessageBox>
         )}
       </div>
     </section>
